@@ -11,6 +11,12 @@ void process(int number, int time) {
 	printf("Prosess %d kjørte i %d sekunder\n", number, time);
 }
 
+void forkcheck(int j){	// Sjekker at programmet forket riktig.
+	if(j == 1){
+	printf("Fork failed, exiting program");
+	exit(EXIT_FAILURE);}	//Avslutter programmet hvis fork ikke ble riktig.
+} 
+
 int main(void){
 	pid_t p = -1;
 	pid_t p0 = -1;
@@ -26,8 +32,10 @@ int main(void){
 	if(p == getpid()){
 	// Forker for å skape en parallell prosess.
 	p0 = fork();
+	forkcheck(p0);
 	if(p == getpid()){
 	p2 = fork();
+	forkcheck(p2);
 	}
 	}
 	// Sjekker at man er inne i den prosessen som kjører parallelt.
@@ -40,16 +48,19 @@ int main(void){
 	{
 	process(2,3);
 	}
-	// Sjekker at man er tilbake i main før man så venter først på at p0 prosessen skal gjøre seg 	     // ferdig for så å forke på nytt.
+	// Sjekker at man er tilbake i main før man så venter først på at p0 pro	
+	// sessen skal gjøre seg ferdig for så å forke på nytt.
 	if(p == getpid())
 	{
 	waitpid(p0,NULL,0);
 	p1 = fork();
+	forkcheck(p1);
 	}
 	// Lager prosessen p4.
 	if(p == getpid())
 	{
 	p4 = fork();
+	forkcheck(p4);
 	}
 	// Kjører funksjon i p1.
 	if(!p1)
@@ -66,6 +77,7 @@ int main(void){
 	{
 	waitpid(p2, NULL, 0);
 	p3 = fork();
+	forkcheck(p3);
 	}
 	// Kjører funksjon i p3 prossessen.
 	if(!p3)
@@ -77,6 +89,7 @@ int main(void){
 	{
 	waitpid(p4,NULL,0);
 	p5 = fork();
+	forkcheck(p5);
 	}
 	// Kjører prosessen i p5.
 	if(!p5)
