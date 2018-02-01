@@ -74,7 +74,7 @@ int main(void) {
 	// Sett opp data til T1
 	targs[1]->id = 1;
 	targs[1]->sec = 2;
-//	targs[1]->signal[3] = 1;
+	//targs[1]->signal[3] = 1;
 	// Initialiser semafor til T1
 	sem_init(&sem[1], SHARED, 0);
 	// Start T1
