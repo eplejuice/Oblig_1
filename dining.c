@@ -93,11 +93,11 @@ void test(int i)
 void think(int i)
 {
 	printf("State of %d  is thinking\n", i);
-	sleep(rand()%5);
+	sleep(rand()%MAXSLEEP);
 }
 
 void eat(int i)
 {
 	printf("State of %d is eating\n", i);
-	sleep(rand()%5);
+	sleep(rand()%MAXSLEEP);
 }	
