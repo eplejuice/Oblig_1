@@ -23,11 +23,11 @@ int main(int argc, char *argv[]) {
 	if(argc <2) {printf("to few arguments\n");return -1;} // sjekker at den sender med argumenter
 	int temp = strtol(argv[1],(char **)NULL, 10);	// gjør om argument til int
 	if(temp < 1){ printf("ugyldig input verdi"); return -1;}// sjekker at det er en gyldig verdi.
-	printf("tallet var %d\n", temp);
+//	printf("tallet var %d\n", temp);
 
-	pthread_t pid[temp], cid[temp];	
+	pthread_t pid[temp], cid[temp];	// lager arrays som holder styr på trådene.
 	// Initialize the contition-variables and the mutex.
-	pthread_cond_init(&condp, 0);
+	pthread_cond_init(&condp, 0); 
 	pthread_cond_init(&condc, 0);
 	pthread_mutex_init(&mutex,0);
 
@@ -35,11 +35,11 @@ int main(int argc, char *argv[]) {
 	printf("main started\n");
 	for(int i = 0; i< temp; i++)
 	{
-	int *arg = malloc(sizeof(int));
-	 if ( arg == NULL ) {
-            printf("Couldn't allocate memory for thread arg.\n");return -1;}
-	*arg = i;
-	pthread_create(&pid[i], NULL, Producer, arg);
+	int *arg = malloc(sizeof(int)); // setter av minne for arg.
+	 if ( arg == NULL ) {	// sjekker om arg ble opprettet riktig.
+            printf("Couldn't allocate memory for thread arg.\n");return -1;} 
+	*arg = i; // sender med nummeret på tråden som et arg(void peker) parameter.
+	pthread_create(&pid[i], NULL, Producer, arg); // lager trådene
 	pthread_create(&cid[i], NULL, Consumer, arg);
 	}
 	
@@ -73,7 +73,7 @@ void *Producer(void *arg) {
 		g_data[g_idx]=1;
 		g_idx++;
 
-		// Print the buffer-status.
+		// Print the buffer-status. Her må vi caste om void pekeren til en int.
 		j=0; printf("(Producer%2d, buffer index is %d)\t",*(int*)arg, g_idx );
 		while(j < g_idx) { j++; printf("="); } printf("\n");
 		
@@ -108,7 +108,7 @@ void *Consumer(void *arg) {
 		g_data[g_idx-1]=0;
 		g_idx--;
 
-		// Print the status of the buffer
+		// Print the status of the buffer. her må vi caste om void pekeren til en int.
 		j=0; printf("(Consumer%2d, buffer index is %d)\t",*(int*)arg, g_idx);
 		while(j < g_idx) { j++; printf("="); } printf("\n");
 		
