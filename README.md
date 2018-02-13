@@ -17,6 +17,12 @@ Filen oblig1_3.c og dining.c ble laget i samarbeid med Per-Kristian Kongelf Buer
     ./<filename>
 
 ## Koden har blitt kvaitetsikret med clang-tidy:
+
+### clang-tidy kan installeres på lunix med kommandoene
+    sudo apt-install clang
+    sudo apt-install clang-tidy
+    
+### Så kjøres med kommandoen:
     clang-tidy -checks='*' -system-headers -header-filter=.* kode.c -- -std=c11
 
 Dette returnerte mange warnings i include filer og header filer, disse kan jeg ikke gjøre noe med og valge derfor å bruke:
