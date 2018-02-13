@@ -18,13 +18,13 @@ Filen oblig1_3.c og dining.c ble laget i samarbeid med Per-Kristian Kongelf Buer
 
 ## Koden har blitt kvaitetsikret med clang-tidy:
 
-### clang-tidy kan installeres på lunix med kommandoene
+### clang-tidy kan installeres på ubuntu med kommandoene
     sudo apt-install clang
     sudo apt-install clang-tidy
     
 ### Så kjøres med kommandoen:
-    clang-tidy -checks='*' -system-headers -header-filter=.* kode.c -- -std=c11
+    clang-tidy -checks='*' -system-headers -header-filter=.* <filnavn>.c -- -std=c11
 
 Dette returnerte mange warnings i include filer og header filer, disse kan jeg ikke gjøre noe med og valge derfor å bruke:
-`clang-tidy -checks='*' kode.c -- -std=c11`
+`clang-tidy -checks='*' <filnavn>.c -- -std=c11`
 Denne returnerte 23 warnings, som ble supressed fordi de var i non-user code.
