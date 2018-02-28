@@ -10,7 +10,7 @@ Filen oblig1_3.c og dining.c ble laget i samarbeid med Per-Kristian Kongelf Buer
 
 
 
-## Alle c filer kan kompileres med kommendoen (inkluderer alle warnings of threads):
+## Alle c filer kan kompileres med kommendoen (inkluderer alle warnings og threads):
     gcc -pthread -Wall -o <filename> <filename.c>
 
 ## Så kjøre programmet med:
